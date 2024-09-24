@@ -19,9 +19,9 @@ function TodoInput({ addTodo }) {
   };
 
   return (
-    <section className="todoInput">
-      <input ref={input} type="text" placeholder="add your todo" value={todo} onChange={handleInputChange}/>
-      <button onClick={handleAddTodo}>Add</button>
+    <section className="todoInput d-flex border-bottom pb-5">
+      <input className="inputBox w-75 me-2" ref={input} type="text" placeholder="add your todo" value={todo} onChange={handleInputChange}/>
+      <button className="addButton btn btn-primary" onClick={handleAddTodo}>Add</button>
     </section>
   );
 }
