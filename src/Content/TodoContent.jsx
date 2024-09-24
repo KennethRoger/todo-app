@@ -1,7 +1,15 @@
 import { useState } from "react";
 
-function TodoContent({ todos, deleteTodo, deleteCompletedTodo, editTodo, toggleCompleted }) {
+function TodoContent({
+  todos,
+  deleteTodo,
+  deleteCompletedTodo,
+  editTodo,
+  toggleCompleted,
+}) {
   const [filter, setFilter] = useState("all");
+  const [editingTodo, setEditingTodo] = useState(null);
+  const [newText, setNewText] = useState("");
 
   const getFilteredTodos = () => {
     if (filter === "completed") {
@@ -13,6 +21,16 @@ function TodoContent({ todos, deleteTodo, deleteCompletedTodo, editTodo, toggleC
     }
   };
 
+  const handleEditClick = (todo) => {
+    setEditingTodo(todo);
+    setNewText(todo.text);
+  };
+
+  const handleSaveEdit = () => {
+    editTodo(editingTodo.id, newText);
+    setEditingTodo(null);
+    setNewText("");
+  };
   return (
     <section className="d-flex gap-5 justify-content-between pt-5">
       <div className="todoContent h-100 w-75">
@@ -24,7 +42,7 @@ function TodoContent({ todos, deleteTodo, deleteCompletedTodo, editTodo, toggleC
               getFilteredTodos()
                 .map((todo) => (
                   <div
-                    onDoubleClick={() => toggleCompleted(todo.id)}
+                    onClick={() => toggleCompleted(todo.id)}
                     className="todoBox"
                   >
                     <li className="task border ps-3 pt-2" key={todo.id}>
@@ -37,7 +55,7 @@ function TodoContent({ todos, deleteTodo, deleteCompletedTodo, editTodo, toggleC
                           data-bs-toggle="modal"
                           data-bs-target="#editModal"
                           onClick={() => {
-                            editTodo(todo.id);
+                            handleEditClick(todo);
                           }}
                         >
                           edit
@@ -60,17 +78,27 @@ function TodoContent({ todos, deleteTodo, deleteCompletedTodo, editTodo, toggleC
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-body">
-                            <input type="text" placeholder="add your todo" />
+                            <input
+                              type="text"
+                              value={newText}
+                              onChange={(e) => setNewText(e.target.value)}
+                              placeholder="edit your todo"
+                            />
                           </div>
                           <div class="modal-footer">
                             <button
                               type="button"
                               class="btn btn-secondary"
                               data-bs-dismiss="modal"
+                              onClick={() => setEditingTodo(null)}
                             >
                               Cancel
                             </button>
-                            <button type="button" class="btn btn-primary">
+                            <button
+                              type="button"
+                              class="btn btn-light"
+                              onClick={handleSaveEdit}
+                            >
                               Set
                             </button>
                           </div>
@@ -89,7 +117,7 @@ function TodoContent({ todos, deleteTodo, deleteCompletedTodo, editTodo, toggleC
         <button onClick={() => setFilter("completed")}>Completed</button>
         <button onClick={() => setFilter("pending")}>Pending</button>
       </div>
-      <div >
+      <div>
         <button onClick={() => deleteCompletedTodo()}>Delete Completed</button>
       </div>
     </section>

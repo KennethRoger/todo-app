@@ -27,7 +27,7 @@ function Content() {
   }
 
   const editTodo = (id) => {
-
+    setTodos((prevTodos))
   };
 
   const toggleCompleted = (id) => {
