@@ -3,11 +3,11 @@
 
 /* Todo Styles */
 .todoContent {
-  height: 500px
+  /* height: 500px */
 }
 
 .todo {
-  height: 500px;
+  /* height: 500px; */
 }
 
 .todoBox {
@@ -15,6 +15,7 @@
   position: relative;
   cursor: pointer;
   user-select: none;
+  list-style: none;
 }
 
 .todoBox:hover .settings {
@@ -23,8 +24,7 @@
 }
 
 .task { 
-  list-style: none;
-  height: 50px;
+  min-height: 50px;
 }
 
 .settings {

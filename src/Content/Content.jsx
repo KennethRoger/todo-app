@@ -39,7 +39,7 @@ function Content() {
   };
 
   return (
-    <main className="p-5">
+    <main className="">
       <TodoInput addTodo={addTodo} />
       <TodoContent
         todos={todos}

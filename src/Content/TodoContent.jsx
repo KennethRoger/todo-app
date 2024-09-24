@@ -41,13 +41,14 @@ function TodoContent({
             ) : (
               getFilteredTodos()
                 .map((todo) => (
-                  <div
+                  <li
                     onClick={() => toggleCompleted(todo.id)}
                     className="todoBox"
+                    key={todo.id}
                   >
-                    <li className="task border ps-3 pt-2" key={todo.id}>
+                    <p className="task border p-3">
                       {todo.completed ? <s>{todo.text}</s> : todo.text}
-                    </li>
+                    </p>
                     <div className="settings">
                       <div className="settingButton">
                         <button
@@ -70,14 +71,14 @@ function TodoContent({
                       </div>
                     </div>
                     <div
-                      class="modal fade"
+                      className="modal fade"
                       id="editModal"
                       data-bs-backdrop="static"
                       data-bs-keyboard="false"
                     >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-body">
+                      <div className="modal-dialog">
+                        <div className="modal-content">
+                          <div className="modal-body">
                             <input
                               type="text"
                               value={newText}
@@ -85,10 +86,10 @@ function TodoContent({
                               placeholder="edit your todo"
                             />
                           </div>
-                          <div class="modal-footer">
+                          <div className="modal-footer">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              className="btn btn-secondary"
                               data-bs-dismiss="modal"
                               onClick={() => setEditingTodo(null)}
                             >
@@ -96,7 +97,7 @@ function TodoContent({
                             </button>
                             <button
                               type="button"
-                              class="btn btn-light"
+                              className="btn btn-light"
                               onClick={handleSaveEdit}
                             >
                               Set
@@ -105,17 +106,17 @@ function TodoContent({
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </li>
                 ))
                 .reverse()
             )}
           </ul>
         </div>
       </div>
-      <div className="filter-section d-flex flex-column w-25">
-        <button onClick={() => setFilter("all")}>All</button>
-        <button onClick={() => setFilter("completed")}>Completed</button>
-        <button onClick={() => setFilter("pending")}>Pending</button>
+      <div className="filter-section d-flex flex-column g-2 w-25">
+        <button type="radio" className="btn border" checked onClick={() => setFilter("all")}>All</button>
+        <button type="radio" className="btn border" onClick={() => setFilter("completed")}>Completed</button>
+        <button type="radio" className="btn border" onClick={() => setFilter("pending")}>Pending</button>
       </div>
       <div>
         <button onClick={() => deleteCompletedTodo()}>Delete Completed</button>
