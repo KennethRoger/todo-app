@@ -23,11 +23,15 @@ function Content() {
   };
 
   const deleteCompletedTodo = () => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed))
-  }
+    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
+  };
 
-  const editTodo = (id) => {
-    setTodos((prevTodos))
+  const editTodo = (id, newText) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, text: newText } : todo
+      )
+    );
   };
 
   const toggleCompleted = (id) => {
